@@ -80,8 +80,8 @@ def validate(model, dataloader, device, normalize_method, statistic,
     end = datetime.now()
 
     score_norm = evaluate(target_norm, forecast_norm)
-    print(f'NORM: sMAPE {score_norm[0]:7.9}; MAE {score_norm[1]:7.9f}; RMSE {score_norm[2]:7.9f}.')
-    print(f'RAW : sMAPE {score[0]:7.9}; MAE {score[1]:7.9f}; RMSE {score[2]:7.9f}.')
+    print(f'NORM: MAPE {score_norm[0]:7.9}; MAE {score_norm[1]:7.9f}; RMSE {score_norm[2]:7.9f}.')
+    print(f'RAW : MAPE {score[0]:7.9}; MAE {score[1]:7.9f}; RMSE {score[2]:7.9f}.')
     if result_file:
         if not os.path.exists(result_file):
             os.makedirs(result_file)
@@ -204,4 +204,4 @@ def test(test_data, args, result_train_file, result_test_file):
                       node_cnt, args.window_size, args.horizon,
                       result_file=result_test_file)
     mae, mape, rmse = performance_metrics['mae'], performance_metrics['mape'], performance_metrics['rmse']
-    print('Performance on test set: sMAPE: {:5.2f} | MAE: {:5.2f} | RMSE: {:5.4f}'.format(mape, mae, rmse))
+    print('Performance on test set: MAPE: {:5.2f} | MAE: {:5.2f} | RMSE: {:5.4f}'.format(mape, mae, rmse))
