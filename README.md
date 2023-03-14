@@ -33,15 +33,15 @@ The detailed descriptions about the parameters are as following:
 | dataset | file name of input csv |
 | window_size | length of sliding window, default 12 |
 | horizon | predict horizon, default 3 |
-| train_length | length of training data, default 7 |
+| train_length | length of training data, default 24 |
 | validate_length | length of validation data, default 2 |
 | test_length | length of testing data, default 1 |
-| epoch | epoch size during training |
-| lr | learning rate |
+| epoch | epoch size during training, default 100 |
+| lr | learning rate, default 1e-4 |
 | multi_layer | hyper parameter of STemGNN which controls the parameter number of hidden layers, default 5 |
 | device | device that the code works on, 'cpu' or 'cuda:x' | 
-| validate_freq | frequency of validation |
-| batch_size | batch size |
+| validate_freq | frequency of validation, default 1 |
+| batch_size | batch size, default 32 |
 | norm_method | method for normalization, 'z_score' or 'min_max' |
 | early_stop | whether to enable early stop, default False |
 
