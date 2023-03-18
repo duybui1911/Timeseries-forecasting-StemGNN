@@ -3,9 +3,9 @@
 This repository is the official implementation of Spectral Temporal Graph Neural Network for
 Multivariate Time-series Forecasting.
 
-# The predicted results of the RH column
+### The predicted results of the RH column
 ![RH column][RH]
-# The predicted results of the Barometer column
+### The predicted results of the Barometer column
 ![RH column][Barometer]
 ...
 # Note:
