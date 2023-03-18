@@ -55,3 +55,4 @@ The detailed descriptions about the parameters are as following:
 | -----   | ---- | ---- | ---- |
 | 17 columns | 19.21 | 45.9448| 0.13|
 
+![RH column](D:\TLHT\Chuỗi thời gian\BTAPCK\StemGNN\RH_column.png)

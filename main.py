@@ -55,7 +55,6 @@ if __name__ == '__main__':
     if args.train:
         try:
             before_train = datetime.now().timestamp()
-            print('Start training')
             _, normalize_statistic = train(train_data, valid_data, args, result_train_file)
             after_train = datetime.now().timestamp()
             print(f'Training took {(after_train - before_train) / 60} minutes')
