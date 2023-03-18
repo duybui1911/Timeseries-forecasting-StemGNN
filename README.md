@@ -2,7 +2,14 @@
 
 This repository is the official implementation of Spectral Temporal Graph Neural Network for
 Multivariate Time-series Forecasting.
-![RH column][def]
+
+# The predicted results of the RH column
+![RH column][RH]
+[RH]: RH_column.png
+# The predicted results of the Barometer column
+![RH column][Barometer]
+[Barometer]: Barometer_column.png
+...
 # Note:
 This is only an application in a course exercise. You can view the original source code of the article "Spectral Temporal Graph Neural Network for Multivariate Time-series Forecasting" at https://github.com/microsoft/StemGNN.
 
@@ -55,5 +62,3 @@ The detailed descriptions about the parameters are as following:
 | -----   | ---- | ---- | ---- |
 | 17 columns | 19.21 | 45.9448| 0.13|
 
-
-[def]: RH_column.png
