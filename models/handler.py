@@ -80,8 +80,8 @@ def validate(model, dataloader, device, normalize_method, statistic,
     end = datetime.now()
 
     score_norm = evaluate(target_norm, forecast_norm)
-    print(f'NORM: MAPE {score_norm[0]:7.9}; MAE {score_norm[1]:7.9f}; RMSE {score_norm[2]:7.9f}.')
-    print(f'RAW : MAPE {score[0]:7.9}; MAE {score[1]:7.9f}; RMSE {score[2]:7.9f}.')
+    print(f'NORM: sMAPE {score_norm[0]:7.9}; MAE {score_norm[1]:7.9f}; RMSE {score_norm[2]:7.9f}; MAPE {score_norm[3]:7.9f}.')
+    print(f'RAW : sMAPE {score[0]:7.9}; MAE {score[1]:7.9f}; RMSE {score[2]:7.9f}; MAPE {score[3]:7.9f}.')
     if result_file:
         if not os.path.exists(result_file):
             os.makedirs(result_file)
@@ -96,8 +96,8 @@ def validate(model, dataloader, device, normalize_method, statistic,
         np.savetxt(f'{result_file}/predict_ape.csv',
                    np.abs((forcasting_2d - forcasting_2d_target) / forcasting_2d_target), delimiter=",")
 
-    return dict(mae=score[1], mae_node=score_by_node[1], mape=score[0], mape_node=score_by_node[0],
-                rmse=score[2], rmse_node=score_by_node[2])
+    return dict(mae=score[1], mae_node=score_by_node[1], smape=score[0], mape_node=score_by_node[0],
+                rmse=score[2], rmse_node=score_by_node[2], mape = score[3])
 
 
 def train(train_data, valid_data, args, result_file):
@@ -203,5 +203,5 @@ def test(test_data, args, result_train_file, result_test_file):
     performance_metrics = validate(model, test_loader, args.device, args.norm_method, normalize_statistic,
                       node_cnt, args.window_size, args.horizon,
                       result_file=result_test_file)
-    mae, mape, rmse = performance_metrics['mae'], performance_metrics['mape'], performance_metrics['rmse']
-    print('Performance on test set: MAPE: {:5.2f} | MAE: {:5.2f} | RMSE: {:5.4f}'.format(mape, mae, rmse))
+    mae, smape, rmse, mape = performance_metrics['mae'], performance_metrics['smape'], performance_metrics['rmse'], performance_metrics['mape']
+    print('Performance on test set: sMAPE: {:4.7f} | MAE: {:5.2f} | RMSE: {:5.4f} | MAPE: {:5.2}'.format(smape, mae, rmse, mape))

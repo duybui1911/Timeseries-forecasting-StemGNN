@@ -4,9 +4,9 @@ This repository is the official implementation of Spectral Temporal Graph Neural
 Multivariate Time-series Forecasting.
 
 ### The predicted results of the RH column
-![RH column][RH]
+![O3 column][O3]
 ### The predicted results of the Barometer column
-![RH column][Barometer]
+![Barometer column][Barometer]
 ...
 # Note:
 This is only an application in a course exercise. You can view the original source code of the article "Spectral Temporal Graph Neural Network for Multivariate Time-series Forecasting" at https://github.com/microsoft/StemGNN.
@@ -39,13 +39,13 @@ The detailed descriptions about the parameters are as following:
 | train | whether to enable training, default True |
 | evaluate | whether to enable evaluation, default True |
 | dataset | file name of input csv |
-| window_size | length of sliding window, default 12 |
+| window_size | length of sliding window, default 24 |
 | horizon | predict horizon, default 3 |
-| train_length | length of training data, default 24 |
+| train_length | length of training data, default 7 |
 | validate_length | length of validation data, default 2 |
 | test_length | length of testing data, default 1 |
-| epoch | epoch size during training, default 100 |
-| lr | learning rate, default 1e-4 |
+| epoch | epoch size during training, default 50|
+| lr | learning rate, default 1e-3 |
 | multi_layer | hyper parameter of STemGNN which controls the parameter number of hidden layers, default 5 |
 | device | device that the code works on, 'cpu' or 'cuda:x' | 
 | validate_freq | frequency of validation, default 1 |
@@ -56,9 +56,9 @@ The detailed descriptions about the parameters are as following:
 
 ## Results
 
-| Dataset | MAE  | RMSE | MAPE |
-| -----   | ---- | ---- | ---- |
-| 17 columns | 19.21 | 45.9448| 0.13|
+| Dataset | MAE  | RMSE | MAPE | sMAPE |
+| -----   | ---- | ---- | ---- | ----  |
+| 17 columns | 18.54 | 51.7004| 1.8 | 0.0011535 | 
 
-[RH]: RH_column.png
+[O3]: O3_column.png
 [Barometer]: Barometer_column.png

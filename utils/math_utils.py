@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def masked_MAPE(v, v_, axis=None):
+def mask_MAPE(v, v_, axis=None):
     '''
     Mean absolute percentage error.
     :param v: np.ndarray or int, ground truth.
@@ -9,7 +9,7 @@ def masked_MAPE(v, v_, axis=None):
     :param axis: axis to do calculation.
     :return: int, MAPE averages on all elements of input.
     '''
-    mask = (v == 0)
+    mask = (v <= 0.01)
     percentage = np.abs(v_ - v) / np.abs(v)
     if np.any(mask):
         masked_array = np.ma.masked_array(percentage, mask=mask)  # mask the dividing-zero as invalid
@@ -21,7 +21,7 @@ def masked_MAPE(v, v_, axis=None):
     return np.mean(percentage, axis).astype(np.float64)
 
 
-def MAPE(v, v_, axis=None):
+def sMAPE(v, v_, axis=None):
     '''
     Mean absolute percentage error.
     :param v: np.ndarray or int, ground truth.
@@ -29,9 +29,9 @@ def MAPE(v, v_, axis=None):
     :param axis: axis to do calculation.
     :return: int, MAPE averages on all elements of input.
     '''
-    mape = (200/len(v))*(np.abs(v_ - v) /( np.abs(v) + np.abs(v_) +1e-5 )).astype(np.float64)
-    mape = np.where(mape > 5, 5, mape)
-    return np.mean(mape, axis)
+    smape = (2/len(v))*(np.abs(v_ - v) /( np.abs(v) + np.abs(v_) +1e-5 )).astype(np.float64)
+    #smape = np.where(smape > 5, 5, smape)
+    return np.mean(smape, axis)
 
 
 def RMSE(v, v_, axis=None):
@@ -65,10 +65,10 @@ def evaluate(y, y_hat, by_step=False, by_node=False):
     :return: array of mape, mae and rmse.
     '''
     if not by_step and not by_node:
-        return MAPE(y, y_hat), MAE(y, y_hat), RMSE(y, y_hat)
+        return sMAPE(y, y_hat), MAE(y, y_hat), RMSE(y, y_hat), mask_MAPE(y, y_hat)
     if by_step and by_node:
-        return MAPE(y, y_hat, axis=0), MAE(y, y_hat, axis=0), RMSE(y, y_hat, axis=0)
+        return sMAPE(y, y_hat, axis=0), MAE(y, y_hat, axis=0), RMSE(y, y_hat, axis=0), mask_MAPE(y, y_hat, axis=0)
     if by_step:
-        return MAPE(y, y_hat, axis=(0, 2)), MAE(y, y_hat, axis=(0, 2)), RMSE(y, y_hat, axis=(0, 2))
+        return sMAPE(y, y_hat, axis=(0, 2)), MAE(y, y_hat, axis=(0, 2)), RMSE(y, y_hat, axis=(0, 2)), mask_MAPE(y, y_hat, axis=(0, 2))
     if by_node:
-        return MAPE(y, y_hat, axis=(0, 1)), MAE(y, y_hat, axis=(0, 1)), RMSE(y, y_hat, axis=(0, 1))
+        return sMAPE(y, y_hat, axis=(0, 1)), MAE(y, y_hat, axis=(0, 1)), RMSE(y, y_hat, axis=(0, 1)), mask_MAPE(y, y_hat, axis=(0, 1))
